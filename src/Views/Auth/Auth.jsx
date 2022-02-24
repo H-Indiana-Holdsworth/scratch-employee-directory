@@ -32,8 +32,6 @@ export default function Auth({ isSigningUp = false }) {
 
   return (
     <div>
-      <h2>{isSigningUp ? 'Sign Up' : 'Sign In'}</h2>
-
       <UserForm onSubmit={handleAuth} label={isSigningUp ? 'Sign Up' : 'Sign In'} />
 
       {isSigningUp ? (

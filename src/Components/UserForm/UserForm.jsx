@@ -31,7 +31,7 @@ export default function UserForm({ label, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {label}
+      <legend>{label}</legend>
       <label>Email</label>
       <input
         id="email"
