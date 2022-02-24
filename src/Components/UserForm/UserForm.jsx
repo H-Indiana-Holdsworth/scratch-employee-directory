@@ -1,0 +1,57 @@
+import React, { useEffect, useState } from 'react';
+import useForm from '../../Hooks/UseForm';
+
+export default function UserForm({ label, onSubmit }) {
+  const { formState, formError, clearForm, handleFormChange, setFormError } = useForm({
+    email: '',
+    password: '',
+  });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    clearForm();
+  }, [label]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = formState;
+
+    try {
+      setFormError('');
+      setLoading(true);
+      await onsubmit(email, password);
+    } catch (error) {
+      setFormError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {label}
+      <label>Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        value={formState.email}
+        onChange={handleFormChange}
+      />
+
+      <label>Password</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        value={formState.password}
+        onChange={handleFormChange}
+      />
+
+      <button type="submit" disabled={loading}>
+        {loading ? 'Loading...' : label}
+      </button>
+      {formError && <p>{formError}</p>}
+    </form>
+  );
+}

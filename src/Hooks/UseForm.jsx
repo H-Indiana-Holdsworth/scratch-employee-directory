@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function UseForm(inputs = {}) {
+export default function useForm(inputs = {}) {
   // use this formState so that we can keep track of all our different input states with one variable. It connects to our inputs by their respective names
 
   const [formState, setFormstate] = useState();
