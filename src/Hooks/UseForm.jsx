@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function useForm(inputs = {}) {
   // use this formState so that we can keep track of all our different input states with one variable. It connects to our inputs by their respective names
 
-  const [formState, setFormstate] = useState();
+  const [formState, setFormstate] = useState(inputs);
   const [formError, setFormError] = useState();
 
   const handleFormChange = (e) => {

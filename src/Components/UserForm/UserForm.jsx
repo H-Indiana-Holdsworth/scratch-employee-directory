@@ -8,9 +8,9 @@ export default function UserForm({ label, onSubmit }) {
   });
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    clearForm();
-  }, [label]);
+  //   useEffect(() => {
+  //     clearForm();
+  //   }, [label]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +18,10 @@ export default function UserForm({ label, onSubmit }) {
 
     try {
       setFormError('');
+      if (!email || password.length < 8)
+        throw new Error('An email and a password longer than 8 characters are required');
       setLoading(true);
-      await onsubmit(email, password);
+      await onSubmit(email, password);
     } catch (error) {
       setFormError(error.message);
     } finally {

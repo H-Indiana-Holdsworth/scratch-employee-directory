@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header() {
@@ -11,7 +12,7 @@ export default function Header() {
         <button>Sign Out</button>
 
         <p>Not signed in</p>
-        <button>Sign In</button>
+        <Link to="/login">Sign In</Link>
       </div>
     </div>
   );
