@@ -1,18 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useUser } from '../../Context/UserContext';
 import './Header.css';
 
 export default function Header() {
+  const { user, setUser } = useUser();
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
   return (
     <div className="header">
       <h2>Acme Employee Directory</h2>
 
       <div className="conditional">
-        <p>You are signed in as user</p>
-        <button>Sign Out</button>
-
-        <p>Not signed in</p>
-        <Link to="/login">Sign In</Link>
+        {user ? (
+          <>
+            <p>You are signed in as {user.email} </p>
+            <button onClick={handleLogout}>Sign Out</button>
+          </>
+        ) : (
+          <>
+            <p>Not signed in</p>
+            <Link to="/login">Sign In</Link>
+          </>
+        )}
       </div>
     </div>
   );
