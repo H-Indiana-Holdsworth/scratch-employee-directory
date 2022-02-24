@@ -1,11 +1,11 @@
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
+import ConfirmEmail from './Components/Auth/ConfirmEmail';
 import Header from './Components/Header/Header';
 import { UserProvider } from './Context/UserContext';
 import Auth from './Views/Auth/Auth';
 import CreateProfile from './Views/CreateProfile/CreateProfile';
-import EditProfile from './Views/EditProfile/EditProfile';
 import Home from './Views/Home/Home';
 import Profile from './Views/Profile/Profile';
 
@@ -32,7 +32,10 @@ function App() {
               <CreateProfile />
             </Route>
             <Route exact path="/profile/edit">
-              <EditProfile />
+              <CreateProfile isEditing />
+            </Route>
+            <Route exact path="/confirm-email">
+              <ConfirmEmail />
             </Route>
           </Switch>
         </BrowserRouter>
