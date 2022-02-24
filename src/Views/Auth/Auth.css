@@ -1,19 +1,1 @@
-.sign-up-form {
-  display: flex;
-  flex-direction: column;
-}
 
-.sign-up-btn {
-  margin: auto;
-  width: fit-content;
-}
-
-.sign-in-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.sign-in-btn {
-  margin: auto;
-  width: fit-content;
-}
