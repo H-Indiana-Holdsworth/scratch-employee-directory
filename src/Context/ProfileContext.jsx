@@ -4,11 +4,15 @@ import { getProfile } from '../services/profiles';
 const ProfileContext = createContext();
 
 function ProfileProvider({ children }) {
+  // need a useEffect because our getProfile fxn is an async await, its like fetch pokemon
+  // we set the profile with an empty object to satisfy supabase
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const resp = await getProfile();
-        setProfile(resp);
+        if (resp.length > 0) {
+          setProfile(resp);
+        }
       } catch (error) {
         setProfile({ name: '', email: '', bio: '', birthday: '' });
       }
@@ -23,6 +27,7 @@ function ProfileProvider({ children }) {
     birthday: '',
   });
 
+  // returns a memoized value. useMemo will only recompute value when profile changes. This helps to avoid expensive calculations on every render
   const value = useMemo(() => {
     profile, setProfile;
   }, [profile]);
