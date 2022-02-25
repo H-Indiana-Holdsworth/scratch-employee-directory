@@ -11,7 +11,7 @@ export default function PrivateRoute({ children, routeProps }) {
       <Route
         {...routeProps}
         render={({ location }) =>
-          user.email ? (
+          user ? (
             children
           ) : (
             <Redirect

@@ -57,7 +57,7 @@ export default function CreateProfile({ onSubmit }) {
           onChange={handleFormChange}
         />
       </label>
-      <button className="save-changes-btn">Create Profile</button>
+      <button className="save-changes-btn">Edit Profile</button>
     </form>
   );
 
@@ -94,6 +94,6 @@ export default function CreateProfile({ onSubmit }) {
     // if not
     // when they click create profile
     // a blank form will show up
-    <>{profile ? editProfile : createProfile}</>
+    <>{profile.email ? editProfile : createProfile}</>
   );
 }

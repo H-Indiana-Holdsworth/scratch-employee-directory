@@ -11,7 +11,6 @@ export default function UserForm({ label, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formState;
-
     try {
       setFormError('');
       if (!email || password.length < 8)
