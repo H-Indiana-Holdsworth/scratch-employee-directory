@@ -19,7 +19,7 @@ export default function Header() {
     <div className="header">
       <h2>Acme Employee Directory</h2>
 
-      {user ? (
+      {user.email ? (
         <>
           <p>You are signed in as {user.email} </p>
           <button onClick={handleLogout}>Sign Out</button>
