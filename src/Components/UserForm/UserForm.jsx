@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useForm from '../../Hooks/UseForm';
 
 export default function UserForm({ label, onSubmit }) {
-  const { formState, formError, clearForm, handleFormChange, setFormError } = useForm({
+  const { formState, formError, handleFormChange, setFormError } = useForm({
     email: '',
     password: '',
   });
   const [loading, setLoading] = useState(false);
-
-  //   useEffect(() => {
-  //     clearForm();
-  //   }, [label]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useMemo } from 'react';
+import { useContext, createContext, useState } from 'react';
 import { getUser } from '../services/users';
 
 const UserContext = createContext();
@@ -9,7 +9,7 @@ function UserProvider({ children }) {
     currentUser ? { id: currentUser.id, email: currentUser.email } : {}
   );
 
-  const value = useMemo(() => ({ user, setUser }), [user]);
+  const value = { user, setUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

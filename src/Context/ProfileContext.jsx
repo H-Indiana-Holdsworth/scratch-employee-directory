@@ -1,24 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { getProfile } from '../services/profiles';
+import { useUser } from './UserContext';
 
 const ProfileContext = createContext();
 
 function ProfileProvider({ children }) {
-  // need a useEffect because our getProfile fxn is an async await, its like fetch pokemon
-  // we set the profile with an empty object to satisfy supabase
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const resp = await getProfile();
-        if (resp.length > 0) {
-          setProfile(resp);
-        }
-      } catch (error) {
-        setProfile({ name: '', email: '', bio: '', birthday: '' });
-      }
-    };
-    fetchProfile();
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   const [profile, setProfile] = useState({
     name: '',
@@ -27,10 +15,26 @@ function ProfileProvider({ children }) {
     birthday: '',
   });
 
-  // returns a memoized value. useMemo will only recompute value when profile changes. This helps to avoid expensive calculations on every render
-  const value = useMemo(() => {
-    profile, setProfile;
-  }, [profile]);
+  // need a useEffect because our getProfile fxn is an async await, its like fetch pokemon
+  // we set the profile with an empty object to satisfy supabase
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setLoading(true);
+      try {
+        const resp = await getProfile();
+        if (resp.length > 0) {
+          setProfile(resp[0]);
+        }
+      } catch (error) {
+        setProfile({ name: '', email: '', bio: '', birthday: '' });
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfile();
+  }, [user]);
+
+  const value = { profile, setProfile, loading };
 
   return <ProfileContext.Provider value={value}> {children} </ProfileContext.Provider>;
 }
