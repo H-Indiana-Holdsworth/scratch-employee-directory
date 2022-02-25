@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import ConfirmEmail from './Components/Auth/ConfirmEmail';
 import Header from './Components/Header/Header';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Auth from './Views/Auth/Auth';
 import Home from './Views/Home/Home';
 import Profile from './Views/Profile/Profile';
@@ -23,15 +24,15 @@ function App() {
           <Route exact path="/register">
             <Auth isSigningUp />
           </Route>
-          <Route exact path="/profile">
+          <PrivateRoute exact path="/profile">
             <ViewProfile />
-          </Route>
-          <Route exact path="/profile/create">
+          </PrivateRoute>
+          <PrivateRoute exact path="/profile/create">
             <Profile />
-          </Route>
-          <Route exact path="/profile/edit">
+          </PrivateRoute>
+          <PrivateRoute exact path="/profile/edit">
             <Profile isEditing />
-          </Route>
+          </PrivateRoute>
           <Route exact path="/confirm-email">
             <ConfirmEmail />
           </Route>
