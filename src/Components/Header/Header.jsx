@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../Context/UserContext';
+import { signOutUser } from '../../services/users';
 import './Header.css';
 
 export default function Header() {
   const { user, setUser } = useUser();
 
-  const handleLogout = () => {
-    setUser(null);
+  const handleLogout = async () => {
+    await signOutUser();
+    setUser({});
   };
 
   return (
